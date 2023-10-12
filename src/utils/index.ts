@@ -8,14 +8,9 @@ function checkResponse(res: Response): Promise<IData> {
   }
 }
 
-export const getBooks = async (searchValue: string, category: string, sortingBy: string) => {
+export const getBooks = async (searchValue: string, category: string, sortingBy: string, startIndex: number = 0) => {
   const response = await fetch(
-    `${URL}?q=${searchValue}+subject:${category}&orderBy=${sortingBy}&key=${API_KEY}&startIndex=0&maxResults=30`
+    `${URL}?q=${searchValue}+subject:${category}&orderBy=${sortingBy}&key=${API_KEY}&startIndex=${startIndex}&maxResults=30`
   );
-  return checkResponse(response);
-};
-
-export const getBook = async (bookId: string) => {
-  const response = await fetch(`${URL}${bookId}&key=${API_KEY}`);
   return checkResponse(response);
 };

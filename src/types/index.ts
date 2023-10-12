@@ -61,12 +61,3 @@ export interface IvolumeInfo {
   subtitle: string;
   title: string;
 }
-
-export interface IBooksState {
-  loading: boolean;
-  booksRequest: boolean;
-  booksFailed: boolean;
-  books: IBook[];
-  currentBook: IBook | undefined;
-  total: number;
-}

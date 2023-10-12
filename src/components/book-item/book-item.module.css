@@ -1,0 +1,5 @@
+.cardBody {
+    max-height: 330px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

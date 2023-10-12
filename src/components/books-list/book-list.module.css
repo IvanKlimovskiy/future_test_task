@@ -1,0 +1,9 @@
+.bookItem {
+    cursor: pointer;
+    transition: 0.5s;
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+    }
+}

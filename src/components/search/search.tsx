@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch } from '../../types/hooks';
-import { fetchBooks } from '../../services/slices/books';
+import { fetchBooks, setDefaultIndex, setIsNewSearch, setSearchOptions } from '../../services/slices/books';
 const Form = styled.form`
   width: 100%;
   max-width: 600px;
@@ -15,6 +15,21 @@ const Form = styled.form`
 const Label = styled.label`
   color: white;
   font-size: 20px;
+  @media (max-width: 398px) {
+    font-size: 15px;
+  }
+`;
+
+const Select = styled.select`
+  @media (max-width: 398px) {
+    font-size: 11px;
+  }
+`;
+
+const Input = styled.input`
+  @media (max-width: 398px) {
+    font-size: 11px;
+  }
 `;
 
 const Button = styled.button`
@@ -39,18 +54,30 @@ const Search = () => {
     setSortingBy(event.currentTarget.value);
   };
   const handleSearch = () => {
+    dispatch(setDefaultIndex());
+    dispatch(setIsNewSearch());
     dispatch(fetchBooks({ searchValue, category, sortingBy }));
+    dispatch(setSearchOptions({ searchValue, category, sortingBy }));
   };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSearch();
+    }
+  };
+
   return (
     <Form>
       <div className="mb-1">
         <Label htmlFor="search" className="form-label">
           Найти
         </Label>
-        <input
+        <Input
           onChange={handleSearchInputChange}
+          onKeyDown={handleKeyDown}
           value={searchValue}
-          type="email"
+          type="text"
           className="form-control"
           id="search"
           placeholder="Поиск..."
@@ -61,7 +88,7 @@ const Search = () => {
           <Label htmlFor="exampleFormControlInput1" className="form-label">
             Категории
           </Label>
-          <select onChange={handleSearchSelectCategory} className="form-select" aria-label="Select categories">
+          <Select onChange={handleSearchSelectCategory} className="form-select" aria-label="Select categories">
             <option defaultValue={category}>Все</option>
             <option value="art">Искусство</option>
             <option value="biography">Биография</option>
@@ -69,16 +96,16 @@ const Search = () => {
             <option value="history">История</option>
             <option value="medical">Медицина</option>
             <option value="poetry">Поэзия</option>
-          </select>
+          </Select>
         </div>
         <div className="col">
           <Label htmlFor="exampleFormControlInput1" className="form-label">
             Отсортировать по
           </Label>
-          <select onChange={handleSearchSelectSorting} className="form-select" aria-label="Search sorting by">
+          <Select onChange={handleSearchSelectSorting} className="form-select" aria-label="Select sorting by">
             <option defaultValue={sortingBy}>Релевантности</option>
             <option value="newest">Новизне</option>
-          </select>
+          </Select>
         </div>
       </div>
       <Button
