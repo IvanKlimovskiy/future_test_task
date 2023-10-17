@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import styles from './book-item.module.css';
 import { translateCategories } from '../../utils';
+import { PATH_BOOK_LIST } from '../../constants';
 const BookItem = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const BookItem = () => {
 
   const handleCloseModal = () => {
     dispatch(showModal(false));
-    navigate('/');
+    navigate(PATH_BOOK_LIST);
   };
 
   const Image = styled.img`

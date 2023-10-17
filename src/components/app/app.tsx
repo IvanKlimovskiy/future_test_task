@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../types/hooks';
 import { fetchBooks } from '../../services/slices/books';
 import Spinner from '../../spinner/spinner';
-import { defaultSearchingOptions } from '../../constants';
+import { PATH_BOOK_LIST, PATH_SINGLE_BOOK, defaultSearchingOptions, BASE_URL_PROD } from '../../constants';
 import { MainPage, NotFoundPage } from '../../pages';
 import SingleBook from '../../pages/single-book';
 
@@ -20,11 +20,11 @@ const App = () => {
   return loading && firstRender ? (
     <Spinner height="100vh" />
   ) : (
-    <Router>
+    <Router basename={BASE_URL_PROD}>
       <Routes>
-        <Route path="/" element={<MainPage books={books} />} />
+        <Route path={PATH_BOOK_LIST} element={<MainPage books={books} />} />
         <Route path="*" element={<NotFoundPage />} />
-        <Route path="books/:bookId" element={<SingleBook books={books} />} />
+        <Route path={PATH_SINGLE_BOOK} element={<SingleBook books={books} />} />
       </Routes>
     </Router>
   );
