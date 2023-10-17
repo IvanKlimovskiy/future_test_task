@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { fetchBooks, setCurrentBook } from '../../services/slices/books';
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { translateCategories } from '../../utils';
 
 const Section = styled.main`
   margin-top: 20px;
@@ -53,7 +54,9 @@ const BooksList: React.FC<IBooksList> = ({ books }) => {
         className={`card text-center ${styles.bookItem}`}
         onClick={() => setBookId(book.id)}
         to={`books/${book.id}`}>
-        <div className="card-header">{book.volumeInfo.categories ? book.volumeInfo.categories[0] : 'Неизвестно'}</div>
+        <div className="card-header">
+          {book.volumeInfo.categories ? translateCategories(book.volumeInfo.categories[0]) : 'Неизвестно'}
+        </div>
         <img src={image} className="card-img-top" alt={book.volumeInfo.title} />
         <div className="card-body">
           <h5 className="card-title mb-4">{book.volumeInfo.title}</h5>

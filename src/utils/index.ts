@@ -14,3 +14,22 @@ export const getBooks = async (searchValue: string, category: string, sortingBy:
   );
   return checkResponse(response);
 };
+
+export const translateCategories = (category: string) => {
+  switch (category) {
+    case 'Art':
+      return 'Искусство';
+    case 'Biography':
+      return 'Биография';
+    case 'Computers':
+      return 'Компьютеры';
+    case 'History':
+      return 'История';
+    case 'Medical':
+      return 'Медицина';
+    case 'Poetry':
+      return 'Поэзия';
+    default:
+      return category;
+  }
+};

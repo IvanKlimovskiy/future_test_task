@@ -6,6 +6,7 @@ import { showModal } from '../../services/slices/modal';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import styles from './book-item.module.css';
+import { translateCategories } from '../../utils';
 const BookItem = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -52,7 +53,11 @@ const BookItem = () => {
                 </p>
                 <p className="card-text">
                   <small className="text-body-secondary">
-                    {book.volumeInfo.categories ? book.volumeInfo.categories.map((category) => category) : 'Неизвестно'}
+                    {book.volumeInfo.categories
+                      ? book.volumeInfo.categories.map((category) => {
+                          return translateCategories(category);
+                        })
+                      : 'Неизвестно'}
                   </small>
                 </p>
               </div>
