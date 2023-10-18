@@ -5,3 +5,5 @@
 2. Typescript
 3. Redux toolkit
 4. React Bootstrap
+
+### Ссылка на проект: https://ivanklimovskiy.github.io/future_test_task/
